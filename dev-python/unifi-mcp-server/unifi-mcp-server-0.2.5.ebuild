@@ -20,7 +20,8 @@ KEYWORDS="~amd64"
 IUSE="agnost"
 
 # agnost is imported conditionally (performance tracking via agnost.ai); the
-# server runs without it. Upstream excludes the broken agnost 0.1.13.
+# server runs without it. Upstream excludes the broken agnost 0.1.13; this
+# overlay only ships dev-python/agnost-0.1.12, so no blocker is needed.
 RDEPEND="
 	>=dev-python/fastmcp-3.1.0[${PYTHON_USEDEP}]
 	>=dev-python/httpx-0.28.1[${PYTHON_USEDEP}]
@@ -35,7 +36,6 @@ RDEPEND="
 	>=dev-python/pyjwt-2.12.0[${PYTHON_USEDEP}]
 	agnost? (
 		>=dev-python/agnost-0.1.12[${PYTHON_USEDEP}]
-		!~dev-python/agnost-0.1.13
 	)
 "
 
