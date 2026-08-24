@@ -1,0 +1,3 @@
+# Locally-generated Portage metadata cache (egencache / `ebuild ... manifest`).
+# Not source; regenerated on demand, so keep it out of the repo.
+/metadata/md5-cache/
