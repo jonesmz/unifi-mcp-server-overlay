@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>gentoo@jonesmz.com</email>
+		<name>Michael Jones</name>
+	</maintainer>
+	<use>
+		<flag name="agnost">Enable optional performance tracking via
+			<pkg>dev-python/agnost</pkg> (agnost.ai)</flag>
+	</use>
+	<upstream>
+		<remote-id type="pypi">unifi-mcp-server</remote-id>
+		<remote-id type="github">enuno/unifi-mcp-server</remote-id>
+	</upstream>
+</pkgmetadata>
