@@ -6,12 +6,21 @@ EAPI=8
 DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="Model Context Protocol (MCP) server for the UniFi Network API"
 HOMEPAGE="
 	https://github.com/enuno/unifi-mcp-server
 	https://pypi.org/project/unifi-mcp-server/
+"
+
+# v0.2.6 was tagged on GitHub but never published to PyPI (PyPI stops at
+# 0.2.5), and upstream's pyproject.toml for the tag still carries
+# version = "0.2.5" (they bumped the tag but not the metadata string).
+# Source from the GitHub tag archive rather than the pypi eclass.
+SRC_URI="
+	https://github.com/enuno/unifi-mcp-server/archive/refs/tags/v${PV}.tar.gz
+		-> ${P}.gh.tar.gz
 "
 
 LICENSE="Apache-2.0"
@@ -39,4 +48,13 @@ RDEPEND="
 	)
 "
 
-# No tests are shipped in the PyPI sdist.
+# No tests are shipped in a usable form in the release tarball.
+RESTRICT="test"
+
+python_prepare_all() {
+	# Upstream tagged v0.2.6 but left pyproject.toml at version = "0.2.5"
+	# (and src/__init__.py at 0.2.1). Pin the build-metadata version to the
+	# tag so the produced wheel reports ${PV} and PEP517 install is clean.
+	sed -i -E "s/^version = \"[0-9.]+\"/version = \"${PV}\"/" pyproject.toml || die
+	distutils-r1_python_prepare_all
+}
